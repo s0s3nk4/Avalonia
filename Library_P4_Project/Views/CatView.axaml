@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:Library_P4_Project.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="Library_P4_Project.Views.CatView"
+             x:DataType="vm:CatViewModel">
+
+	<Border>
+		<Border.Background>
+			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+				<GradientStop Color="AliceBlue" Offset="0"/>
+				<GradientStop Color="AntiqueWhite" Offset="1"/>
+			</LinearGradientBrush>
+		</Border.Background>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" Grid.Row="1" Grid.Column="0" Background="LightBlue"  >
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel>
+							<TextBlock Text="{Binding Title}" FontWeight="Bold"  />
+							<TextBlock Text="{Binding Author}"  FontFamily="Algerian"/>
+							<TextBlock Text="{Binding Category.Name}"  />
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+	
+			<ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Grid.Row="1" Grid.Column="1" Background="LightCyan"  >
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel>
+							<TextBlock Text="{Binding Name}" FontWeight="Bold"  />
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		
+			<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Command="{Binding DeleteBookCommand}" Content="Delete Book" Margin="5"  FontFamily="Algerian"/>
+				<Button Command="{Binding CreateBookCommand}" Content="Add Book" Margin="5"  FontFamily="Algerian"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Command="{Binding DeleteCategoryCommand}" Content="Delete Category" Margin="5"  FontFamily="Algerian"/>
+				<Button Command="{Binding CreateCategoryCommand}" Content="Add Category" Margin="5"  FontFamily="Algerian"/>
+			</StackPanel>
+		
+			<Button Command="{Binding BackCommand}" Content="Back" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10"  FontFamily="Algerian"/>
+		</Grid>
+	</Border>
+	
+</UserControl>
